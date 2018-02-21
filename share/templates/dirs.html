@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block Title %}{{ address }}{% endblock %}
+{% block BackLink %}<a href="..">Back</a>{% endblock %}
+{% block Body %}
+    {% if address %}
+        <h4><span style="color: red">[access mode : {{ location.access_mode }}]</span> {{ address }}</h4>
+        <a href="/upload{{ address }}">Upload to this Directory</a><br>
+        <span>Download this Directory : </span>
+        <a href="/download{{ address }}:zip">zip</a>
+        <a href="/download{{ address }}:tar">tar</a>
+        <a href="/download{{ address }}:tar.gz">tar.gz</a>
+        <a href="/download{{ address }}:tar.bz2">tar.bz2</a>
+    {% else %}
+        <h4>this address is not available.</h4>
+    {% endif %}
+    <hr>
+    <h4>directories :</h4>
+    {% for dir in dirs %}
+        <a href="/share{{ address }}{{ dir }}/">{{ dir }}</a><br>
+    {% empty %}
+        <span>no directories.</span>
+    {% endfor %}
+
+    <h4>files :</h4>
+    {% for file in files %}
+        <a href="/share{{ address }}{{ file }}">{{ file }}</a><br>
+    {% empty %}
+        <span>no files.</span>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block Title %}share{% endblock %}
+{% block Body %}
+    <h3>this locations are available :</h3>
+    {% for location in locations %}
+        {% if location.active %}
+            <span style="color: red">[access mode : {{ location.access_mode }}]</span>
+            <a href="/share{{ location.path }}">{{ location.path }}</a></br>
+        {% endif %}
+    {% empty %}
+        <span>Empty!</span>
+    {% endfor %}
+{% endblock %}

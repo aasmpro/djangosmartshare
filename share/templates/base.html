@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block Title %}{% endblock %}</title>
+    {% block HeadContent %}{% endblock %}
+</head>
+<body>
+<a href="/">Home</a> | {% block BackLink %}{% endblock %}
+{% block Body %}{% endblock %}
+</body>
+{% block AfterBody %}{% endblock %}
+</html>
