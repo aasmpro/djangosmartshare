@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Delete{% endblock %}
+{% block body %}
+    <div class="container">
+        <br>
+        <div class="card">
+            <form action="/delete{{ address }}:{{ itype }}" name="delete_form" method="post"
+                  enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="card-body">
+                    <p>are you sure for deleting : </p>
+                    <p>{{ address }}</p>
+                </div>
+                <button name="Delete"
+                        class="btn btn-danger btn-block text-center rounded-0 mb-0" type="submit">
+                    Yes, Delete.
+                </button>
+                <button name="Cancel" style="border-top-left-radius: 0; border-top-right-radius: 0"
+                        class="btn btn-secondary btn-block text-center mt-0" type="submit">
+                    No.
+                </button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

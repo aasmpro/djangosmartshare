@@ -1,10 +1,18 @@
 {% extends 'base.html' %}
-{% block Title %}Upload{% endblock %}
-{% block BackLink %}<a href="..">Back</a>{% endblock %}
-{% block Body %}
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Upload</button>
-    </form>
+{% block title %}Upload{% endblock %}
+{% block body %}
+    <div class="container">
+        <br>
+        <div class="card">
+            <div class="card-body">
+                <form name="Upload" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.file }}
+                </form>
+            </div>
+            <button style="border-top-left-radius: 0; border-top-right-radius: 0" class="btn btn-primary btn-block text-center" type="submit" onclick="Upload.submit()">
+                upload
+            </button>
+        </div>
+    </div>
 {% endblock %}

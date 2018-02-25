@@ -1,0 +1,17 @@
+html, body {
+    height: 100%;
+}
+
+@media print {
+    html, body {
+        background: white;
+    }
+
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}
+
+a:hover {
+    text-decoration-line: none;
+}

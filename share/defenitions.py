@@ -1,9 +1,31 @@
 from django.http import HttpResponse
 from os.path import isfile, getsize, join
-from os import listdir, walk
+from os import listdir, mkdir, rmdir, system
 from wsgiref.util import FileWrapper
-import tempfile, zipfile
+import tempfile
 import shutil
+
+
+def handle_delete(address, itype):
+    try:
+        system("rm -rf {}".format(address))
+    except:
+        pass
+
+
+def handle_make_file(address, content):
+    try:
+        with open(address, 'w+') as file:
+            file.write(content)
+    except:
+        pass
+
+
+def handle_make_dir(address):
+    try:
+        mkdir(address)
+    except:
+        pass
 
 
 def handle_uploaded_file(f, address):
@@ -16,7 +38,7 @@ def send_file(address):
     filename = address
     wrapper = FileWrapper(open(filename, 'rb'))
     response = HttpResponse(wrapper, content_type='application/force-download')
-    response['Content-Disposition'] = 'attachment; filename={}'.format(address.split('/')[-1])
+    response['Content-Disposition'] = 'attachment; filename={}'.format(address.split('/')[-1].replace(' ', '-'))
     response['Content-Length'] = getsize(filename)
     return response
 
@@ -40,7 +62,7 @@ def send_zipfile(address, ftype):
 
     wrapper = FileWrapper(open('{}/temp.{}'.format(tmpdir, ftype), 'rb'))
     response = HttpResponse(wrapper, content_type='application/force-download')
-    response['Content-Disposition'] = 'attachment; filename={}.{}'.format(address, ftype)
+    response['Content-Disposition'] = 'attachment; filename={}.{}'.format(address.replace(' ', '_')[1:-1], ftype)
     response['Content-Length'] = getsize('{}/temp.{}'.format(tmpdir, ftype))
     shutil.rmtree(tmpdir)
     return response
@@ -52,8 +74,8 @@ def readable_size(size, label):
         'KB': 'MB',
         'MB': 'GB'
     }
-    if size >= 1000 and label != 'GB':
-        size /= 1000
+    if size >= 1024 and label != 'GB':
+        size /= 1024
         label = size_replace[label]
         return readable_size(size, label)
 
@@ -64,24 +86,25 @@ def readable_size(size, label):
         return '{0:.2f} {label}'.format(round(size, 2), label=label)
 
 
-def get_content(path, hidden_dirs=False, hidden_files=False):
+def get_content(path, s_files, s_dirs, h_files, h_dirs):
     path = '{}/'.format(path) if path[-1] != '/' else str(path)
     dirs = []
     files = []
     try:
         for ld in listdir(path):
-            if isfile('{}{}'.format(path, ld)):
+            if isfile('{}{}'.format(path, ld)) and s_files:
                 if ld.startswith('.'):
-                    if hidden_files:
+                    if h_files:
                         files.append(ld)
                 else:
                     files.append(ld)
-            else:
+            elif s_dirs:
                 if ld.startswith('.'):
-                    if hidden_dirs:
+                    if h_dirs:
                         dirs.append(ld)
                 else:
                     dirs.append(ld)
+
     except FileNotFoundError:
         dirs = FileNotFoundError
         files = FileNotFoundError
