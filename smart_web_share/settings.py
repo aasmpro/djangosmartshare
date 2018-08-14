@@ -24,7 +24,7 @@ SECRET_KEY = 'i7rj6^-jh!v2+_jt&^6esd)&xy-ajgg$z%6e7q+h8ww1#fgz%i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', socket.gethostbyname(socket.gethostname())]
+ALLOWED_HOSTS = ['127.0.0.1', socket.gethostbyname(socket.gethostname()), '.serveo.net']
 
 # Application definition
 INSTALLED_APPS = [
