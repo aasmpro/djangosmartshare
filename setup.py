@@ -18,7 +18,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
         "Environment :: Web Environment",
         "Framework :: Django",
-        "Framework :: Django :: 2",
+        "Framework :: Django :: 2.1",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
