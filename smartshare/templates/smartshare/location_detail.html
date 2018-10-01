@@ -1,5 +1,4 @@
-{% extends 'base.html' %}
-{% load share_templatetags %}
+{% extends 'smartshare/base.html' %}
 {% block title %}{{ address }}{% endblock %}
 {% block body %}
     <div class="container">
@@ -16,17 +15,17 @@
                     {% endif %}
                 {% if location.can_up_a %}
                     <a style="width: 70px" class="badge-pill badge-primary text-center"
-                       href="/upload{{ address }}">upload</a>
+                       href="{% url 'upload' address %}">upload</a>
                 {% endif %}
                 {% if location.can_down_a %}
                     <a style="width: 70px" class="badge-pill badge-success text-center"
-                       href="/download{{ address }}:zip">zip</a>
+                       href="{% url 'download' address 'zip' %}">zip</a>
                     <a style="width: 70px" class="badge-pill badge-success text-center"
-                       href="/download{{ address }}:tar">tar</a>
+                       href="{% url 'download' address 'tar' %}">tar</a>
                     <a style="width: 70px" class="badge-pill badge-success text-center"
-                       href="/download{{ address }}:tar.gz">tar.gz</a>
+                       href="{% url 'download' address 'tar.gz' %}">tar.gz</a>
                     <a style="width: 70px" class="badge-pill badge-success text-center"
-                       href="/download{{ address }}:tar.bz2">tar.bz2</a>
+                       href="{% url 'download' address 'tar.bz2' %}">tar.bz2</a>
                 {% endif %}
                 {% if location.can_up_a or location.can_down_a %}
                     </div>
@@ -37,17 +36,17 @@
                     {% endif %}
                 {% if location.can_up_u %}
                     <a style="width: 70px" class="badge-pill badge-primary text-center"
-                       href="/upload{{ address }}">upload</a>
+                       href="{% url 'upload' address %}">upload</a>
                 {% endif %}
                 {% if location.can_down_u %}
                     <a style="width: 70px" class="badge-pill badge-success text-center"
-                       href="/download{{ address }}:zip">zip</a>
+                       href="{% url 'download' address 'zip' %}">zip</a>
                     <a style="width: 70px" class="badge-pill badge-success text-center"
-                       href="/download{{ address }}:tar">tar</a>
+                       href="{% url 'download' address 'tar' %}">tar</a>
                     <a style="width: 70px" class="badge-pill badge-success text-center"
-                       href="/download{{ address }}:tar.gz">tar.gz</a>
+                       href="{% url 'download' address 'tar.gz' %}">tar.gz</a>
                     <a style="width: 70px" class="badge-pill badge-success text-center"
-                       href="/download{{ address }}:tar.bz2">tar.bz2</a>
+                       href="{% url 'download' address 'tar.bz2' %}">tar.bz2</a>
                 {% endif %}
                 {% if location.can_up_u or location.can_down_u %}
                     </div>
@@ -59,17 +58,17 @@
                 {% endif %}
             {% if location.can_up_p %}
                 <a style="width: 70px" class="badge-pill badge-primary text-center"
-                   href="/upload{{ address }}">upload</a>
+                   href="{% url 'upload' address %}">upload</a>
             {% endif %}
             {% if location.can_down_p %}
                 <a style="width: 70px" class="badge-pill badge-success text-center"
-                   href="/download{{ address }}:zip">zip</a>
+                   href="{% url 'download' address 'zip' %}">zip</a>
                 <a style="width: 70px" class="badge-pill badge-success text-center"
-                   href="/download{{ address }}:tar">tar</a>
+                   href="{% url 'download' address 'tar' %}">tar</a>
                 <a style="width: 70px" class="badge-pill badge-success text-center"
-                   href="/download{{ address }}:tar.gz">tar.gz</a>
+                   href="{% url 'download' address 'tar.gz' %}">tar.gz</a>
                 <a style="width: 70px" class="badge-pill badge-success text-center"
-                   href="/download{{ address }}:tar.bz2">tar.bz2</a>
+                   href="{% url 'download' address 'tar.bz2' %}">tar.bz2</a>
             {% endif %}
             {% if location.can_up_p or location.can_down_p %}
                 </div>
@@ -87,16 +86,19 @@
                     {% if user.is_authenticated %}
                         {% if user.is_superuser %}
                             {% if location.can_crt_a %}
-                                <a href="/mkdir{{ address }}" class="btn-sm badge-pill badge-primary text-center ml-2">Add</a>
+                                <a href="{% url 'makedir' address %}"
+                                   class="btn-sm badge-pill badge-primary text-center ml-2">Add</a>
                             {% endif %}
                         {% else %}
                             {% if location.can_crt_u %}
-                                <a href="/mkdir{{ address }}" class="btn-sm badge-pill badge-primary text-center ml-2">Add</a>
+                                <a href="{% url 'makedir' address %}"
+                                   class="btn-sm badge-pill badge-primary text-center ml-2">Add</a>
                             {% endif %}
                         {% endif %}
                     {% else %}
                         {% if location.can_crt_p %}
-                            <a href="/mkdir{{ address }}" class="btn-sm badge-pill badge-primary text-center ml-2">Add</a>
+                            <a href="{% url 'makedir' address %}"
+                               class="btn-sm badge-pill badge-primary text-center ml-2">Add</a>
                         {% endif %}
                     {% endif %}
                 </span>
@@ -107,12 +109,13 @@
                     {% if user.is_superuser %}
                         {% for dir in dirs %}
                             <div style="padding: 0" class="list-group-item d-flex justify-content-between">
-                                <a class="col-9 p-2 pl-3" href="/share{{ address }}{{ dir }}/">
+                                <a class="col-9 p-2 pl-3" href="{% url 'location_detail' address|add:dir %}/">
                                     {{ dir }}
                                 </a>
                                 <div class="col-3 text-right p-2 pr-3">
                                     {% if location.can_del_a %}
-                                        <a class="btn-sm badge-pill badge-danger text-center" href="/delete{{ address }}{{ dir }}/:dir">Delete</a>
+                                        <a class="btn-sm badge-pill badge-danger text-center"
+                                           href="{% url 'delete' address|add:dir|add:'/' 'dir' %}">Delete</a>
                                     {% endif %}
                                 </div>
                             </div>
@@ -120,12 +123,13 @@
                     {% else %}
                         {% for dir in dirs %}
                             <div style="padding: 0" class="list-group-item d-flex justify-content-between">
-                                <a class="col-9 p-2 pl-3" href="/share{{ address }}{{ dir }}/">
+                                <a class="col-9 p-2 pl-3" href="{% url 'location_detail' address|add:dir %}/">
                                     {{ dir }}
                                 </a>
                                 <div class="col-3 text-right p-2 pr-3">
-                                    {% if location.can_del_u %}
-                                        <a class="btn-sm badge-pill badge-danger text-center" href="/delete{{ address }}{{ dir }}/:dir">Delete</a>
+                                    {% if location.can_del_a %}
+                                        <a class="btn-sm badge-pill badge-danger text-center"
+                                           href="{% url 'delete' address|add:dir|add:'/' 'dir' %}">Delete</a>
                                     {% endif %}
                                 </div>
                             </div>
@@ -134,12 +138,13 @@
                 {% else %}
                     {% for dir in dirs %}
                         <div style="padding: 0" class="list-group-item d-flex justify-content-between">
-                            <a class="col-9 p-2 pl-3" href="/share{{ address }}{{ dir }}/">
+                            <a class="col-9 p-2 pl-3" href="{% url 'location_detail' address|add:dir %}/">
                                 {{ dir }}
                             </a>
                             <div class="col-3 text-right p-2 pr-3">
-                                {% if location.can_del_p %}
-                                    <a class="btn-sm badge-pill badge-danger text-center" href="/delete{{ address }}{{ dir }}/:dir">Delete</a>
+                                {% if location.can_del_a %}
+                                    <a class="btn-sm badge-pill badge-danger text-center"
+                                       href="{% url 'delete' address|add:dir|add:'/' 'dir' %}">Delete</a>
                                 {% endif %}
                             </div>
                         </div>
@@ -158,16 +163,19 @@
                     {% if user.is_authenticated %}
                         {% if user.is_superuser %}
                             {% if location.can_crt_a %}
-                                <a href="/mkfile{{ address }}" class="btn-sm badge-pill badge-primary text-center ml-2">Add</a>
+                                <a href="{% url 'makefile' address %}"
+                                   class="btn-sm badge-pill badge-primary text-center ml-2">Add</a>
                             {% endif %}
                         {% else %}
                             {% if location.can_crt_u %}
-                                <a href="/mkfile{{ address }}" class="btn-sm badge-pill badge-primary text-center ml-2">Add</a>
+                                <a href="{% url 'makefile' address %}"
+                                   class="btn-sm badge-pill badge-primary text-center ml-2">Add</a>
                             {% endif %}
                         {% endif %}
                     {% else %}
                         {% if location.can_crt_p %}
-                            <a href="/mkfile{{ address }}" class="btn-sm badge-pill badge-primary text-center ml-2">Add</a>
+                            <a href="{% url 'makefile' address %}"
+                               class="btn-sm badge-pill badge-primary text-center ml-2">Add</a>
                         {% endif %}
                     {% endif %}
                 </span>
@@ -179,13 +187,16 @@
                         {% for file in files %}
                             <div style="padding: 0" class="list-group-item d-flex justify-content-between">
                                 <a class="col-9 p-2 pl-3"
-                                   href="{% if location.can_down_a %}/download{{ address }}{{ file }}:file{% endif %}">
-                                    {{ file }}
-                                    <small class="ml-2 text-secondary">{% file_size address file %}</small>
+                                   href="{% if location.can_down_a %}
+                                        {% url 'download' address|add:file.name 'file' %}
+                                     {% endif %}">
+                                    {{ file.name }}
+                                    <small class="ml-2 text-secondary">{{ file.size|filesizeformat }}</small>
                                 </a>
                                 <div class="col-3 text-right p-2 pr-3">
                                     {% if location.can_del_a %}
-                                        <a class="btn-sm badge-pill badge-danger text-center" href="/delete{{ address }}{{ file }}:file">Delete</a>
+                                        <a class="btn-sm badge-pill badge-danger text-center"
+                                           href="{% url 'delete' address|add:file.name 'file' %}">Delete</a>
                                     {% endif %}
                                 </div>
                             </div>
@@ -194,13 +205,16 @@
                         {% for file in files %}
                             <div style="padding: 0" class="list-group-item d-flex justify-content-between">
                                 <a class="col-9 p-2 pl-3"
-                                   href="{% if location.can_down_u %}/download{{ address }}{{ file }}:file{% endif %}">
-                                    {{ file }}
-                                    <small class="ml-2 text-secondary">{% file_size address file %}</small>
+                                   href="{% if location.can_down_a %}
+                                        {% url 'download' address|add:file.name 'file' %}
+                                     {% endif %}">
+                                    {{ file.name }}
+                                    <small class="ml-2 text-secondary">{{ file.size|filesizeformat }}</small>
                                 </a>
                                 <div class="col-3 text-right p-2 pr-3">
-                                    {% if location.can_del_u %}
-                                        <a class="btn-sm badge-pill badge-danger text-center" href="/delete{{ address }}{{ file }}:file">Delete</a>
+                                    {% if location.can_del_a %}
+                                        <a class="btn-sm badge-pill badge-danger text-center"
+                                           href="{% url 'delete' address|add:file.name 'file' %}">Delete</a>
                                     {% endif %}
                                 </div>
                             </div>
@@ -210,13 +224,16 @@
                     {% for file in files %}
                         <div style="padding: 0" class="list-group-item d-flex justify-content-between">
                             <a class="col-9 p-2 pl-3"
-                               href="{% if location.can_down_p %}/download{{ address }}{{ file }}:file{% endif %}">
-                                {{ file }}
-                                <small class="ml-2 text-secondary">{% file_size address file %}</small>
+                               href="{% if location.can_down_a %}
+                                        {% url 'download' address|add:file.name 'file' %}
+                                     {% endif %}">
+                                {{ file.name }}
+                                <small class="ml-2 text-secondary">{{ file.size|filesizeformat }}</small>
                             </a>
                             <div class="col-3 text-right p-2 pr-3">
-                                {% if location.can_del_p %}
-                                    <a class="btn-sm badge-pill badge-danger text-center" href="/delete{{ address }}{{ file }}:file">Delete</a>
+                                {% if location.can_del_a %}
+                                    <a class="btn-sm badge-pill badge-danger text-center"
+                                       href="{% url 'delete' address|add:file.name 'file' %}">Delete</a>
                                 {% endif %}
                             </div>
                         </div>

@@ -1,10 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'smartshare/base.html' %}
 {% block title %}Delete{% endblock %}
 {% block body %}
     <div class="container">
         <br>
         <div class="card">
-            <form action="/delete{{ address }}:{{ itype }}" name="delete_form" method="post"
+            <form action="{% url 'delete' address data_type %}" name="delete_form" method="post"
                   enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="card-body">

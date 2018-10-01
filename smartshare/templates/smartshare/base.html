@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static "smartshare/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "smartshare/css/base.css" %}">
+    {% block head %}{% endblock %}
+</head>
+<body {% block body_tag %}{% endblock %} >
+    {% block body %}{% endblock %}
+    <script src="{% static "smartshare/js/jquery-3.2.1.slim.min.js" %}"></script>
+    <script src="{% static "smartshare/js/popper.min.js" %}"></script>
+    <script src="{% static "smartshare/js/bootstrap.min.js" %}"></script>
+</body>
+</html>
