@@ -1,15 +1,45 @@
-# smart_web_share
+# smart share
 a simple django app for sharing files over http / https.
-
-this app had been written with **Python 3.6** and **Django 2**
 
 > attention :
 >
 > on test, not bug free.
 > i just started this project for fun, so will be glad if you use and report issues on this project.
 
+
+## Requirements
+* python >= 3.5
+* django >= 2
+
+## Installation
+```
+pip3 install django_smartshare
+```
+adding `smartshare` to `INSTALLED_APPS` in `settings.py`:
+```python
+INSTALLED_APPS = [
+    ...,
+    'smartshare',
+    ...,
+]
+```
+including `smartshare.urls` in your project `urls.py`:
+```python
+from django.urls import path, include
+
+urlpatterns = [
+    ...,
+    path('', include('smartshare.urls')),
+    ...,
+]
+```
+running `migrate` for making related database tables:
+```
+python3 manage.py migrate
+```
+
 ## Features
-by this app, you can simply share any directory on your local system over http / https, in short : just like a file browser.
+you can simply share any directory on your local system over http / https, in short : just like a file browser.
 
 in `Location` model, by adding a new location, system will check if the path exist, so you can have following permissions separated for 3 different user types per each **Location** object. **Admins** , **Users** ( mean normal users ) and **Anonymouse Visitors** ( public ) :
 
@@ -51,10 +81,3 @@ this Features are planned to be added in next version :
 - [ ] changing **dirs.html** template for adding **Upload**, **Delete**, **Add** forms.
 - [ ] rewriting **views** definitions.
 - [ ] rewriting responsive template for a better UX / UI.
-
-## Runnig Project on local IP
-the `runserver.py` file, will run the local test server of django on local ip and `8000` port.
-django settings will automatically added your local IP to `ALLOWED_HOSTS`, just run this command in where main directory of project:
-```
-python3.6 runserver.py
-```

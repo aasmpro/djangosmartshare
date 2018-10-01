@@ -1,4 +1,10 @@
 .idea
-db.sqlite3
 */__pycache__/*
+
+db.sqlite3
 smartshareserver
+manage.py
+
+smartshare.egg-info
+dist
+build
