@@ -1,11 +1,12 @@
 import setuptools
+from smartshare import __version__
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="djangosmartshare",
-    version="0.8.7",
+    version=__version__,
     author="Abolfazl Amiri",
     author_email="aa.smpro@gmail.com",
     description="simple django app for sharing files over http / https.",
@@ -13,6 +14,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/aasmpro/djangosmartshare",
     packages=setuptools.find_packages(exclude=['smartshareserver']),
+    include_package_data=True,
     classifiers=[
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",

@@ -7,3 +7,5 @@ prune .git
 exclude .gitignore
 exclude db.sqlite3
 exclude manage.py
+global-exclude __pycache__
+global-exclude *.py[co]
