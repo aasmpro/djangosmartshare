@@ -11,7 +11,7 @@ setuptools.setup(
     description="simple django app for sharing files over http / https.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/aasmpro/smartshare",
+    url="https://github.com/aasmpro/djangosmartshare",
     packages=setuptools.find_packages(),
     classifiers=[
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",

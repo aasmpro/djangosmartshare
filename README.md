@@ -1,4 +1,4 @@
-# smart share
+# django smart share
 a simple django app for sharing files over http / https.
 
 > attention :
