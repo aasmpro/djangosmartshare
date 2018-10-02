@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="djangosmartshare",
-    version="0.8.6",
+    version="0.8.7",
     author="Abolfazl Amiri",
     author_email="aa.smpro@gmail.com",
     description="simple django app for sharing files over http / https.",
