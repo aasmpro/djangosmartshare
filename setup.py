@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="smartshare",
+    name="djangosmartshare",
     version="0.8.5",
     author="Abolfazl Amiri",
     author_email="aa.smpro@gmail.com",

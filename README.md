@@ -12,8 +12,9 @@ a simple django app for sharing files over http / https.
 * django >= 2
 
 ## Installation
+install using `pip`:
 ```
-pip3 install django_smartshare
+pip install djangosmartshare
 ```
 adding `smartshare` to `INSTALLED_APPS` in `settings.py`:
 ```python
