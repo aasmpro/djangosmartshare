@@ -1,11 +1,9 @@
 # django smart share
-a simple django app for sharing files over http / https.
+simple django app for sharing files over http / https.
 
-> attention :
->
-> on test, not bug free.
-> i just started this project for fun, so will be glad if you use and report issues on this project.
+![DirectoryAsAdmin2.png](screenshots/DirectoryAsAdmin2.png)
 
+more [screenshots](screenshots)
 
 ## Requirements
 * python >= 3.5
@@ -62,14 +60,7 @@ Can Upload | if this permission be `True`, user can upload Files in directory an
 Can Delete | if this permission be `True`, a **Delete** button will be showed for each subdirectories and files in directory, so user can delete them.
 Can Create | if this permission be `True`, an **Add** button will be showed for Directories and Files, so user can add new directory, or a file with it's content.
 
-this app have a simple responsive front-end design, created using **Bootstrap 4** framework. by default, needed static files are in `static/css` and `static/js` directories outside of app directory for avoiding duplication. if you are planning to uses this app make sure to include these files or replacing `share/templates/base.html` styles and scripts with **Bootstrap 4** SDN.
-
-this users are added for testing :
-
-username | password | is superuser
----------|----------|-------------
-admin | adminadmin | yes
-user | useruser | no
+this app have a simple responsive front-end design, created using **Bootstrap 4** framework.
 
 ## TO DO
 this Features are planned to be added in next version :
@@ -82,3 +73,6 @@ this Features are planned to be added in next version :
 - [ ] changing **dirs.html** template for adding **Upload**, **Delete**, **Add** forms.
 - [ ] rewriting **views** definitions.
 - [ ] rewriting responsive template for a better UX / UI.
+
+## Contribution
+any contributions are warmly accepted! even if you have any idea about enhancing this project, i'd be glad to hear from you.

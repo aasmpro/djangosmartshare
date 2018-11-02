@@ -3,6 +3,7 @@ include README.md
 recursive-include smartshare/static *
 recursive-include smartshare/templates *
 prune smartshareserver
+prune screenshots
 prune .git
 exclude .gitignore
 exclude db.sqlite3

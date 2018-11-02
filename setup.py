@@ -13,7 +13,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/aasmpro/djangosmartshare",
-    packages=setuptools.find_packages(exclude=['smartshareserver']),
+    packages=setuptools.find_packages(exclude=['smartshareserver', 'screenshots']),
     include_package_data=True,
     classifiers=[
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
