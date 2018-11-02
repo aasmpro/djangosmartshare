@@ -3,7 +3,7 @@ simple django app for sharing files over http / https.
 
 ![DirectoryAsAdmin2.png](screenshots/DirectoryAsAdmin2.png)
 
-more [screenshots](screenshots)
+more [screenshots](screenshots/screenshots.md)
 
 ## Requirements
 * python >= 3.5

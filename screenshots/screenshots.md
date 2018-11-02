@@ -1,4 +1,4 @@
-Shared Directories
+Shared Locations
 
 ![SharedDirectories.png](SharedDirectories.png)
 
